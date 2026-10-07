@@ -1,0 +1,259 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Homsa Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  /* Layout: single reading column case study, navy hero in the product's own navy + gold identity, sections separated by clear headings. */
+  :root{
+    --bg:#f2f4f8; --surface:#ffffff; --ink:#0f1c36; --muted:#56637a; --line:#dbe1ec;
+    --brand:#14315c; --brand-soft:#e6ecf7; --gold:#f2b705; --gold-soft:#fdf3cf; --gold-text:#7a5a00;
+    --hero-bg:#0c1f3d; --hero-ink:#ffffff; --hero-muted:#b7c4de;
+    --display:'Source Serif 4',Georgia,serif; --body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#091326; --surface:#0f1d38; --ink:#e8eef9; --muted:#9aa9c5; --line:#21345a;
+      --brand:#8fb0e8; --brand-soft:#172a4d; --gold:#f2b705; --gold-soft:#2b2410; --gold-text:#f2c94c;
+      --hero-bg:#12294e; --hero-ink:#ffffff; --hero-muted:#b7c4de; color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#091326; --surface:#0f1d38; --ink:#e8eef9; --muted:#9aa9c5; --line:#21345a;
+    --brand:#8fb0e8; --brand-soft:#172a4d; --gold:#f2b705; --gold-soft:#2b2410; --gold-text:#f2c94c;
+    --hero-bg:#12294e; --hero-ink:#ffffff; --hero-muted:#b7c4de; color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;padding-inline:16px;padding-block:0 64px}
+  .wrap{max-width:860px;margin-inline:auto}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  p{margin:0 0 14px}
+
+  .hero{background:var(--hero-bg);color:var(--hero-ink);margin-inline:-16px;padding:56px 16px 44px}
+  .hero .wrap{display:flex;flex-direction:column;gap:18px}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .hero h1{font-family:var(--display);font-size:clamp(34px,6.5vw,56px);line-height:1.12;font-weight:700}
+  .hero .lead{font-size:clamp(17px,2.4vw,20px);color:var(--hero-muted);max-width:60ch;margin:0}
+  .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px 28px;margin:10px 0 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.18)}
+  .meta dt{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+  .meta dd{margin:0;font-size:15px;line-height:1.55}
+
+  section{padding-block:44px 0}
+  .sec-label{font-size:12.5px;font-weight:700;color:var(--gold-text);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+  h2{font-family:var(--display);font-size:clamp(25px,3.6vw,32px);font-weight:700;color:var(--brand);margin-bottom:16px;line-height:1.25}
+  h3{font-size:17px;font-weight:700;margin-bottom:4px;line-height:1.4}
+  .sub{color:var(--muted)}
+  ul.plain{margin:0 0 14px;padding-inline-start:22px}
+  ul.plain li{margin-bottom:6px}
+
+  .journey{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;counter-reset:j}
+  .journey li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;counter-increment:j;min-width:0}
+  .journey li::before{content:counter(j);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0c1f3d;font-weight:700;font-size:13px;margin-bottom:8px}
+  .journey b{display:block;font-size:16px;margin-bottom:2px}
+  .journey span{font-size:14.5px;color:var(--muted);line-height:1.55;display:block}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+  .tile p{font-size:15px;color:var(--muted);margin:0;line-height:1.6}
+  .tile .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);padding:1px 10px;border-radius:99px;margin-bottom:8px}
+
+  .arch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:20px 0 10px}
+  .node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+  .node.mid{background:var(--brand-soft);border-color:var(--brand)}
+  .node h3{font-size:16px}
+  .node p{font-size:14.5px;color:var(--muted);line-height:1.55;margin:0}
+  .arrow{display:grid;place-items:center;color:var(--gold-text);font-size:22px;font-weight:700}
+  @media (max-width:640px){
+    .arch{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);height:24px}
+  }
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+  th,td{text-align:start;padding:11px 14px;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.55}
+  th{background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:13.5px;white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td:first-child{font-weight:700;white-space:nowrap}
+
+  .pairs{display:grid;gap:12px}
+  .pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .pair>div{padding:14px 18px;min-width:0;font-size:15px}
+  .pair .q{background:var(--brand-soft);font-weight:700;color:var(--brand)}
+  @media (max-width:560px){.pair{grid-template-columns:1fr}}
+
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
+  .metric{border:1.5px dashed var(--gold);background:var(--gold-soft);border-radius:10px;padding:14px 16px}
+  .metric b{display:block;font-size:24px;color:var(--gold-text);font-variant-numeric:tabular-nums;line-height:1.3}
+  .metric span{font-size:14.5px;color:var(--muted)}
+  .note{font-size:14px;color:var(--muted);margin-top:10px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{font-size:13.5px;font-weight:600;padding:3px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Case study</div>
+    <h1>Homsa Travel Management System</h1>
+    <p class="lead">A single web platform that brought public relations, leads, subscriptions, accommodation and customer follow-up into one place, and connected them from the first lead to the customer's return from the trip.</p>
+    <dl class="meta">
+      <div><dt>My role</dt><dd>End-to-end design and development: interface, backend, database and permissions</dd></div>
+      <div><dt>Industry</dt><dd>Religious tourism: Umrah and Hajj</dd></div>
+      <div><dt>Stack</dt><dd>HTML · CSS · JavaScript<br>Google Apps Script · Google Sheets</dd></div>
+      <div><dt>Users</dt><dd>13 job roles, each with its own screens and permissions</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-label">Overview</div>
+    <h2>One system instead of scattered data</h2>
+    <p>I designed and built a complete web system for Homsa Travel that lets every department work on the same data. A public relations employee registers a lead. When the lead subscribes, a subscription is created automatically. The accommodation team assigns the trip, hotel and room in Makkah and Madinah. The call center records the customer's feedback after the trip, and management follows performance and targets from the same screen.</p>
+    <p>The system runs on Google Sheets as the database and Google Apps Script as the backend, so the company uses it without servers or hosting fees, and can open the sheet and review the data at any time.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Problem</div>
+    <h2>Each department kept its data somewhere else</h2>
+    <p>The company's work passes through several departments: in-office and field public relations, subscriptions, accommodation, call center and accounting. When customer data lives in more than one file, familiar problems appear:</p>
+    <ul class="plain">
+      <li>The same customer is entered more than once, and the copies drift apart.</li>
+      <li>There is no quick way to see who is responsible for a customer or how they reached the company.</li>
+      <li>Moving a lead to a subscriber, and then to accommodation, meant copying data by hand between files.</li>
+      <li>Tracking each employee's and team's performance against their goals was calculated manually.</li>
+      <li>Each employee should see only their own data, which is hard to guarantee when a file is open to everyone.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Goal</div>
+    <h2>Enter data once, and show each role only what it needs</h2>
+    <p>I set three goals: data is recorded once and flows between departments without retyping, every employee sees and edits only what concerns them, and management can measure performance and reward results using real numbers from the same data.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Solution</div>
+    <h2>The customer journey inside the system</h2>
+    <p>I built the system around the real customer journey, so each stage hands off to the next without duplicate entry.</p>
+    <ol class="journey">
+      <li><b>Lead or agent registered</b><span>Automatic customer code, source, and responsible employee.</span></li>
+      <li><b>Converted to subscriber</b><span>Changing the status to "subscribed" opens a required receipt form and creates the subscription automatically.</span></li>
+      <li><b>Lottery and trip</b><span>Lottery status, and linking the subscriber or winner to a trip.</span></li>
+      <li><b>Accommodation</b><span>A hotel and room in Makkah, and a hotel and room in Madinah, for each person.</span></li>
+      <li><b>Travel and follow-up</b><span>Travel status, then a feedback call from the call center after the trip.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-label">Modules</div>
+    <h2>What I built inside the system</h2>
+    <div class="grid">
+      <div class="tile"><span class="tag">Public relations</span><h3>Leads and agents</h3><p>Inline cell editing, bulk CSV import that skips duplicate numbers, and filtering by date and status.</p></div>
+      <div class="tile"><span class="tag">Public relations</span><h3>Teams and members</h3><p>The general manager sees every team, a team leader sees their own team, and a member sees only their own data and links.</p></div>
+      <div class="tile"><span class="tag">Public relations</span><h3>Visit reports</h3><p>Company visits with a status and dated follow-ups for each visit, plus a full detail view.</p></div>
+      <div class="tile"><span class="tag">Operations</span><h3>Subscriptions and winners</h3><p>Subscriptions with package type, installments and down payment, linked groups of several people, and separate views for cancelled subscriptions and lottery winners.</p></div>
+      <div class="tile"><span class="tag">Operations</span><h3>Trips and accommodation</h3><p>Trips with a required headcount and remaining-seats countdown, hotels and rooms with capacity and type (men, women, family), and guests per room.</p></div>
+      <div class="tile"><span class="tag">Call center</span><h3>Customer feedback</h3><p>Each trip's names load from a sheet. Staff pick a 0 to 5 rating and add notes, and each trip shows its average rating.</p></div>
+      <div class="tile"><span class="tag">Management</span><h3>Targets and incentives</h3><p>Weekly or monthly targets per employee and team by package type, achievement calculated from real subscriptions, and a fixed incentive per Umrah customer and per Hajj customer.</p></div>
+      <div class="tile"><span class="tag">Management</span><h3>Performance dashboards</h3><p>Dashboards users build themselves: pie, bar and table widgets, a two-level breakdown such as employee by package type, and daily, monthly and yearly logs.</p></div>
+      <div class="tile"><span class="tag">Management</span><h3>Permissions and edit history</h3><p>The admin sets, per employee and per section, what they can view, add, edit and delete. Every change is logged with the user, time, and the before and after values.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Architecture</div>
+    <h2>Three simple layers, no server to maintain</h2>
+    <div class="arch">
+      <div class="node"><h3>Interface</h3><p>One Arabic, right-to-left page that works on desktop and mobile.</p></div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="node mid"><h3>Backend</h3><p>Google Apps Script: login, session verification, and permission checks on every request.</p></div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="node"><h3>Database</h3><p>Google Sheets: one sheet per section, which the company can review and export at any time.</p></div>
+    </div>
+    <p class="sub">The interface never reads the sheet directly. Every read and write goes through the backend, which decides whether the user is allowed and returns only the permitted rows.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Roles</div>
+    <h2>Each role sees its own work</h2>
+    <p>Default permissions come from the role, and the admin can customize them for any employee at the section level. Each section also has a visibility scope: all employees, the employee's team, or only the employee's own records.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Role</th><th>What they see and do</th></tr></thead>
+        <tbody>
+          <tr><td>System admin</td><td>Every section, plus permissions, accounts and the edit history.</td></tr>
+          <tr><td>PR general manager</td><td>All teams, and setting targets and incentive rates.</td></tr>
+          <tr><td>Team leader</td><td>Their team's and members' data and reports.</td></tr>
+          <tr><td>Team member</td><td>Their own leads, subscriptions and data only.</td></tr>
+          <tr><td>Accommodation</td><td>Trips, hotels and rooms, and assigning subscribers to them, without editing subscription details.</td></tr>
+          <tr><td>Call center</td><td>Customer feedback after the trip.</td></tr>
+          <tr><td>HR, accounting, analyst</td><td>Only the sections that concern them; the analyst role is view-only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Challenges</div>
+    <h2>Problems I hit and how I solved them</h2>
+    <div class="pairs">
+      <div class="pair"><div class="q">Slow Google Apps Script</div><div class="a">Browser-side caching, merging simultaneous reads into one request, a server cache versioned per table that refreshes the moment anything is written, and loading the remaining sections in the background after the first screen appears.</div></div>
+      <div class="pair"><div class="q">Concurrent writes from different users</div><div class="a">A server lock that runs writes one after another, so two requests never write to the same empty row.</div></div>
+      <div class="pair"><div class="q">Edits lost when the connection drops</div><div class="a">Each edit shows on screen immediately and goes into a queue that syncs in the background with automatic retries, plus a warning before closing the page if anything is still unconfirmed.</div></div>
+      <div class="pair"><div class="q">Names typed differently</div><div class="a">One name can be written with or without hamza or with extra spaces, which made employees lose sight of their own records. I unified matching by normalizing names with the same rule in the interface and the backend.</div></div>
+      <div class="pair"><div class="q">Dates shifting by a day</div><div class="a">Timezone differences between the browser and the sheet showed a different day than the one picked. I now read date parts straight from the text and store dates in the sheet's own timezone.</div></div>
+      <div class="pair"><div class="q">Input turning into formulas</div><div class="a">Any text that starts with a formula character is sanitized before it is written to the sheet, so entered data can never run as a command.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Security</div>
+    <h2>Permissions are enforced on the server</h2>
+    <ul class="plain">
+      <li>Signed, time-limited login sessions tied to a per-user version, so logging out or changing a password invalidates old sessions.</li>
+      <li>Passwords are stored hashed with a per-user salt and repeated hashing, never shown after saving, and the users table never returns sensitive fields to the browser.</li>
+      <li>Failed login attempts are rate limited with a temporary lockout.</li>
+      <li>The backend checks the role and record ownership on every request, so editing the page in the browser never unlocks extra access.</li>
+      <li>The edit log stamps the user on the server, so nobody can write under someone else's name, and old entries are archived automatically.</li>
+      <li>Salary, national ID and address fields are removed from responses for any role other than management and HR.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Impact</div>
+    <h2>What changed after the system</h2>
+    <ul class="plain">
+      <li>Customer data is recorded once and moves from lead to subscription to accommodation, instead of being retyped in each department.</li>
+      <li>Every employee sees their own numbers, targets and incentive without asking anyone.</li>
+      <li>Management compares teams and employees using real numbers from the same data.</li>
+      <li>Every change can be traced: who edited what, when, and with which value.</li>
+    </ul>
+    <div class="metrics" aria-label="Numbers to add from your own work">
+      <div class="metric"><b>[ __ ]</b><span>Active users</span></div>
+      <div class="metric"><b>[ __ ]</b><span>Customers and subscriptions recorded</span></div>
+      <div class="metric"><b>[ __ ]</b><span>Time saved on entry or reporting</span></div>
+    </div>
+    <p class="note">The dashed boxes are numbers to fill in from the company's real usage before you share this page.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Next</div>
+    <h2>What I plan to build next</h2>
+    <ul class="plain">
+      <li>Move to a dedicated database once data volume outgrows Google Sheets.</li>
+      <li>Notifications for late payments and upcoming trip dates.</li>
+      <li>Export of performance and target reports to print-ready files.</li>
+    </ul>
+    <div class="chips" aria-label="Technologies used">
+      <span class="chip">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">Google Apps Script</span><span class="chip">Google Sheets</span><span class="chip">LockService</span><span class="chip">CacheService</span>
+    </div>
+  </section>
+
+  <footer>Homsa Travel Management System — case study</footer>
+</main>
+
+</body></html>

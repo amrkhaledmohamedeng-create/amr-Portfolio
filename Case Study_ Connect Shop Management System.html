@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case Study: Connect Shop Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cu:#c1793f;--cu-l:#e0a26a;--cu-d:#8f5a2c;--bg:#f7f3ee;--fg:#1f1b18;--muted:#6b625b;--line:#e2d8cd;--card:#fff;--hero:#19191c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--fg:#eceaea;--muted:#a3a1a6;--line:#2b2b30;--card:#222226}}
+:root[data-theme="dark"]{--bg:#141416;--fg:#eceaea;--muted:#a3a1a6;--line:#2b2b30;--card:#222226}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Inter','Segoe UI',Tahoma,sans-serif;font-size:17px;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{background:radial-gradient(circle at 80% 20%,rgba(193,121,63,.28),transparent 50%),var(--hero);color:#fff;padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(30px,5.2vw,50px);line-height:1.2;margin:0 0 18px;font-weight:800}
+.hero p{margin:0 0 22px;opacity:.88;max-width:52ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{border:1px solid rgba(224,162,106,.5);color:var(--cu-l);border-radius:999px;padding:3px 14px;font-size:14px}
+.logo-card{background:#222226;border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:44px 26px;box-shadow:0 30px 60px rgba(0,0,0,.45);transform:rotate(-2.5deg);animation:land .9s cubic-bezier(.2,.9,.3,1.15) both;text-align:center}
+.mark{width:96px;height:96px;margin:0 auto 14px;border-radius:26px;background:linear-gradient(145deg,var(--cu-l),var(--cu-d));color:#1a1408;font-size:46px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(193,121,63,.4)}
+.logo-card b{font-size:26px;letter-spacing:.5px}
+@keyframes land{from{opacity:0;transform:translateY(40px) rotate(4deg) scale(.9)}to{opacity:1;transform:rotate(-2.5deg)}}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.facts div{padding:26px 14px;text-align:center;border-right:1px solid var(--line)}
+.facts div:last-child{border-right:0}
+.facts b{display:block;font-size:34px;line-height:1.2;color:var(--cu)}
+.facts span{color:var(--muted);font-size:14px}
+section{padding:54px 0 6px}
+h2{font-size:30px;line-height:1.3;margin:0 0 16px;font-weight:800}
+p{margin:0 0 14px;max-width:70ch}
+.lead{font-size:19px}
+dl{margin:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+dt{font-weight:800;margin-top:20px;padding-left:14px;border-left:4px solid var(--cu)}
+dd{margin:2px 0 0;padding-left:18px;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 1.5fr;gap:30px;padding:24px 0;border-top:1px solid var(--line)}
+.row h3{margin:0;font-size:19px;line-height:1.5}
+.row small{display:block;color:var(--cu);font-weight:700;font-size:14px}
+.row p{margin:0;color:var(--muted)}
+.palette{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.sw{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 18px 10px 14px}
+.sw i{width:38px;height:38px;border-radius:10px;display:block;border:1px solid var(--line)}
+.sw b{display:block;line-height:1.3}.sw span{font-size:13px;color:var(--muted);display:block}
+table{border-collapse:collapse;width:100%;margin-top:14px}
+th,td{text-align:left;padding:12px 10px;border-top:1px solid var(--line);vertical-align:top}
+th{width:30%;font-weight:700}td{color:var(--muted)}
+.result{list-style:none;margin:16px 0 0;padding:0}
+.result li{padding:10px 0 10px 30px;position:relative;border-top:1px solid var(--line)}
+.result li:before{content:"";position:absolute;left:2px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--cu)}
+footer{margin-top:56px;background:var(--hero);color:#fff;padding:34px 0;text-align:center}
+footer p{margin:0 auto;opacity:.9}
+@media(max-width:760px){
+.hero{padding:44px 0 52px}.hero .wrap{grid-template-columns:1fr;gap:30px}.logo-card{max-width:320px}
+.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(2){border-right:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+dl{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:8px}th{width:36%}}
+@media(prefers-reduced-motion:reduce){.logo-card{animation:none}}
+:focus-visible{outline:3px solid var(--cu);outline-offset:3px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<div>
+<h1>Connect: A Complete Management System for a Phone and Accessories Shop</h1>
+<p>An Arabic-language web system I designed and built from scratch. It brings barcode sales, repairs, inventory, cash transfers and accounting together in one place.</p>
+<div class="tags"><span>HTML / CSS / JavaScript</span><span>Google Apps Script</span><span>Google Sheets</span></div>
+</div>
+<div class="logo-card"><div class="mark">C</div><b>Connect</b></div>
+</div></header>
+
+<div class="wrap">
+<div class="facts">
+<div><b>9</b><span>sections in the system</span></div>
+<div><b>23</b><span>backend operations</span></div>
+<div><b>8</b><span>data sheets</span></div>
+<div><b>2,900+</b><span>lines of code</span></div>
+</div>
+
+<section>
+<h2>The Problem</h2>
+<p class="lead">A shop selling phones, computers and accessories, and also doing repairs and cash transfers, needed to know at any moment: what's in stock, what sold today, what each repair earned, and which employee handled what.</p>
+<p>The brief was a simple system that runs in the browser with no server and no subscriptions, that the staff can use from day one, and that works with the barcode scanner already at the counter.</p>
+</section>
+
+<section>
+<h2>My Role</h2>
+<p>I built the whole project myself: understanding how the shop works, designing the interface, designing the data model, and writing both the front end and the back end.</p>
+</section>
+
+<section>
+<h2>What I Built</h2>
+<dl>
+<dt>Barcode Selling</dt><dd>Scan from any screen and the system jumps to the product and sells it. An unknown code opens a quick-add form with the code already filled in.</dd>
+<dt>Repairs</dt><dd>Each ticket records the device, the fault, the customer, the parts cost and the labor margin, so the profit on every repair is clear.</dd>
+<dt>Accessories &amp; Devices</dt><dd>Categories and device types can be added freely. Every item has a code, wholesale price and profit margin, and stock drops with each sale.</dd>
+<dt>Cash Transfers</dt><dd>Every transfer is logged with the customer, the amount and the employee who handled it.</dd>
+<dt>Inventory</dt><dd>One screen to review, add and edit all stock, with codes generated automatically when none is given.</dd>
+<dt>Accounting &amp; Staff</dt><dd>Revenue, cost and profit across repairs, accessories and devices, with daily and periodic views. Staff accounts are manager-only.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Challenges and How I Solved Them</h2>
+<div class="row"><h3><small>Speed</small>A Google Sheets backend is slow by nature</h3>
+<p>I cached the data in the browser, prefetched the main lists right after login, and moved saving to the background: the form closes immediately and a small message at the bottom confirms the data was updated. Moving between sections feels almost instant.</p></div>
+<div class="row"><h3><small>Hardware</small>Telling a barcode scanner from a person typing</h3>
+<p>Scanners type much faster than people. I listen for fast keystroke bursts ending in Enter, so a scan works from any screen without clicking into a field, while normal typing in forms is left alone.</p></div>
+<div class="row"><h3><small>Unique codes</small>Items without a barcode still need an identity</h3>
+<p>When no code is entered, the backend generates a six-digit one and checks it against both accessories and devices, so two products never share a code.</p></div>
+<div class="row"><h3><small>Growth</small>The schema keeps changing as the shop does</h3>
+<p>Setup creates every sheet in one run, and a header check adds any missing column automatically, so new fields can ship without breaking existing data.</p></div>
+</section>
+
+<section>
+<h2>Visual Identity</h2>
+<p>A dark charcoal interface with copper accents for a professional, distinctive look. The whole layout is right-to-left in the Tajawal typeface, and the sidebar collapses to icons on small screens.</p>
+<div class="palette">
+<div class="sw"><i style="background:#19191c"></i><div><b>Charcoal</b><span>#19191C</span></div></div>
+<div class="sw"><i style="background:#c1793f"></i><div><b>Copper</b><span>#C1793F</span></div></div>
+<div class="sw"><i style="background:#e0a26a"></i><div><b>Light copper</b><span>#E0A26A</span></div></div>
+</div>
+</section>
+
+<section>
+<h2>Tech Stack</h2>
+<table>
+<tr><th>Front end</th><td>Vanilla JavaScript with no libraries, full RTL support, mobile-responsive design</td></tr>
+<tr><th>Back end</th><td>Google Apps Script running as an API, with the data stored in Google Sheets</td></tr>
+<tr><th>Roles</th><td>Login with permissions; the staff section is manager-only</td></tr>
+<tr><th>Printing</th><td>Receipt generated from the front end</td></tr>
+</table>
+</section>
+
+<section>
+<h2>The Result</h2>
+<ul class="result">
+<li>The shop runs on one system instead of scattered notebooks: repairs, sales, stock, cash transfers and accounting.</li>
+<li>Barcode selling saves the cashier time, and every sale is tied to an employee.</li>
+<li>The owner sees cost and profit on every transaction, with no manual calculations.</li>
+<li>Running cost is close to zero, because everything runs on a Google account.</li>
+</ul>
+</section>
+</div>
+
+<footer><div class="wrap"><p>Connect: a project I built entirely myself, from idea to launch.</p></div></footer>
+</body>
+</html>
